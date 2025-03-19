@@ -8,40 +8,48 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-        <div class="bg-dark wrapper">
-            <form  action="/submit-post" method="POST" class="bg-light text-secondary"  >
-                <img src="v873batch5-aew-20.jpg" 
-                style="width:360px;" >
-                <input type="text" id="title" name="title" required placeholder="Title"><br>
-                <input type="text" id="author" name="author" required placeholder="Author"><br>
-                <textarea id="content" name="content" required ></textarea>
-                <button onclick="window.location.href='/form';" type="button" class="button">Submit</button>
-            </form>
-        
-            
-              <div class="card">
-                <div class="card-header">
-                  <img src="https://www.newsbtc.com/wp-content/uploads/2020/06/mesut-kaya-LcCdl__-kO0-unsplash-scaled.jpg" alt="ballons" />
-                </div>
-                <div class="card-body">
-                  <span class="tag tag-purple">Popular</span>
-                  <h4>
-                    How to Keep Going When You Don’t Know What’s Next
-                  </h4>
-                  <p>
-                    The future can be scary, but there are ways to
-                    deal with that fear.
-                  </p>
-                  <div class="user">
-                    <img src="https://lh3.googleusercontent.com/ogw/ADGmqu8sn9zF15pW59JIYiLgx3PQ3EyZLFp5Zqao906l=s32-c-mo" alt="user" />
-                    <div class="user-info">
-                      <h5>Eyup Ucmaz</h5>
-                      <small>Yesterday</small>
-                    </div>
-                  </div>
-                </div>
+    <div class="bg-dark min-vh-100 d-flex">
+  
+        <!-- Left Side: Form -->
+        <div class="wrapper">
+          <form action="/submit-post" method="POST" class="text-secondary">
+            <h2>Add a New Post</h2>
+            <input type="text" id="title" name="title" required placeholder="Title">
+            <input type="text" id="author" name="author" required placeholder="Author">
+            <textarea id="content" name="content" required></textarea>
+            <button type="button" class="button">Submit</button>
+          </form>
+        </div>
+      
+        <!-- Right Side: Posts -->
+        <div class="cards-container">
+          
+          <div class="card">
+            <div class="card-body">
+              <span class="tag tag-purple">Popular</span>
+              <h4>How to Keep Going When You Don’t Know What’s Next</h4>
+              <p>The future can be scary, but there are ways to deal with that fear.</p>
+              <div class="user-info">
+                <button class="editBtn" type="button"><small>Edit</small></button>
+                <button class="deleteBtn" type="button"><small>Delete</small></button>
+              </div>
             </div>
-</div>
-   
+          </div>
+      
+          <div class="card">
+            <div class="card-body">
+              <span class="tag tag-purple">Trending</span>
+              <h4>New Blogging Strategies for 2024</h4>
+              <p>Discover the latest techniques to grow your audience.</p>
+              <div class="user-info">
+                <button class="editBtn" type="button"><small>Edit</small></button>
+                <button class="deleteBtn" type="button"><small>Delete</small></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+      
 </body>
 </html>
