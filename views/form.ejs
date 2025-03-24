@@ -8,22 +8,23 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
+    <!--Main-->
     <div class="bg-dark min-vh-100 d-flex">
-  
         <!-- Left Side: Form -->
         <div class="wrapper">
-          <form action="/submit-post" method="POST" class="text-secondary">
-            <h2>Add a New Post</h2>
+          <form action="/submit" method="POST" class="text-secondary">
+            <img src="Blogify Logo - Original - 5000x5000.png" width="90" height="90"alt="icon">
+            <h2 class="text-center">Create a Blog Post</h2>
             <input type="text" id="title" name="title" required placeholder="Title">
             <input type="text" id="author" name="author" required placeholder="Author">
-            <textarea id="content" name="content" required></textarea>
-            <button type="button" class="button">Submit</button>
+            <textarea id="content" name="content" required placeholder="Write and let the world listen to your voice"></textarea>
+            <button type="submit" class="button">Submit</button>
           </form>
         </div>
-      
+        <!--Form END-->
+
         <!-- Right Side: Posts -->
         <div class="cards-container">
-          
           <div class="card">
             <div class="card-body">
               <span class="tag tag-purple">Popular</span>
@@ -31,7 +32,7 @@
               <p>The future can be scary, but there are ways to deal with that fear.</p>
               <div class="user-info">
                 <button class="editBtn" type="button"><small>Edit</small></button>
-                <button class="deleteBtn" type="button"><small>Delete</small></button>
+                <button class="deleteBtn" type="button" data-post-id="<%=post.id  %>"><small>Delete</small></button>
               </div>
             </div>
           </div>
@@ -43,13 +44,67 @@
               <p>Discover the latest techniques to grow your audience.</p>
               <div class="user-info">
                 <button class="editBtn" type="button"><small>Edit</small></button>
-                <button class="deleteBtn" type="button"><small>Delete</small></button>
+                <button class="deleteBtn" type="button" data-post-id="<%=post.id  %>"><small>Delete</small></button>
               </div>
             </div>
           </div>
+          <% if (typeof posts !== "undefined" && posts.length > 0) { %>
+            <% posts.forEach(post => { %>
+                <div class="card userCard" data-post-id="<%=post.id  %>">
+                    <div class="card-body">
+                        <span class="tag tag-purple">New Post</span>
+                        <h4><%= post.title %></h4>
+                        <p><%= post.content %></p>
+                        <p><small>By: <%= post.author %></small></p>
+                        <div class="user-info">
+                          <button class="editBtn" type="button"><small>Edit</small></button>
+                          <button class="deleteBtn" type="button" data-post-id="<%=post.id %>"><small>Delete</small></button>
+                    </div>
+                </div>
+            </div>
+            <% }); %>
+        <% } else { %>
+            <p style="color: red;">No posts yet. Start by writing one!</p>
+        <% } %>
+        
+        <!--Card Container END-->
         </div>
-      
-      </div>
-      
+    <!--Main END-->   
+      </div>   
+   
+<script>
+ 
+
+const deleteBtns = document.querySelectorAll(".deleteBtn");
+  
+deleteBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+    const postId=btn.getAttribute("data-post-id");
+     fetch("/delete-post", {
+       method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({postId: postId}),
+     })
+     .then((response) => response.json())
+     .then((data) => {
+      console.log(data.message);
+      btn.closest(".card").remove();
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    });
+  });
+ 
+
+  
+  
+
+
+
+    
+</script>      
 </body>
 </html>

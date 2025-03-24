@@ -40,7 +40,7 @@ input, textarea {
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 13px;
   outline: none;
   transition: border 0.3s ease-in-out;
 }
@@ -48,7 +48,7 @@ input, textarea {
 textarea{
   height: 200px;
 }
-input::placeholder{
+input::placeholder, textarea::placeholder{
   color:#8a8a8a;
   font-size:small;
   font-weight: lighter;
@@ -73,20 +73,26 @@ input::placeholder{
 
 
 
-input:focus, .editBtn:focus, .deleteBtn:focus, button:focus{
+input:focus,.editBtn:hover,.deleteBtn:hover, button:focus{
         outline: 2px solid #195F85; /* Change outline color */
         border-color: #195F85; /* Change border color */
         box-shadow: 0 0 8px rgba(23, 162, 184, 0.6); /* Add glow effect */
     }
-    .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      min-height: 100vh;
-    }
-
+   
+.cards-container{
+  max-width: 1000px;
+  min-height: 80vh;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 2; 
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 10px;
+  margin-top: 60px;
+  padding-left: 20px;
+}
 .wrapper{
-   max-width: 40%;
+   max-width: 50%;
    height: 100vh;
    display: flex;
    justify-content:center;   
@@ -101,13 +107,9 @@ input:focus, .editBtn:focus, .deleteBtn:focus, button:focus{
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     width: 300px;
-   flex: 2; /* Takes 70% of space */
-   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  
-    
-
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
   }
   .card-body {
     display: flex;
@@ -160,6 +162,6 @@ input:focus, .editBtn:focus, .deleteBtn:focus, button:focus{
   border-radius: 12px;}
 
   .userCard{
-   visibility: hidden;
+   display: none;
   }
   
