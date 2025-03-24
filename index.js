@@ -15,13 +15,10 @@ app.get('/', (req, res) => {
     res.render("index.ejs");});
 
 app.get('/form', (req, res) => {
-    res.render('form.ejs',{
-        posts:posts,
-        error: null,
-        id: 0
-        
-    }); 
+    console.log("Rendering form.ejs with posts:", posts);  // Debugging
+    res.render('form.ejs', { posts: posts, error: null });
     });
+    
  app.post("/submit", (req, res) => {
     try { 
             const title = req.body.title;

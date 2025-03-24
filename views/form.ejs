@@ -50,22 +50,23 @@
           </div>
           <% if (typeof posts !== "undefined" && posts.length > 0) { %>
             <% posts.forEach(post => { %>
-                <div class="card userCard" data-post-id="<%=post.id  %>">
+                <div class="card userCard" data-post-id="<%= post.id %>">
                     <div class="card-body">
                         <span class="tag tag-purple">New Post</span>
                         <h4><%= post.title %></h4>
                         <p><%= post.content %></p>
                         <p><small>By: <%= post.author %></small></p>
                         <div class="user-info">
-                          <button class="editBtn" type="button"><small>Edit</small></button>
-                          <button class="deleteBtn" type="button" data-post-id="<%=post.id %>"><small>Delete</small></button>
+                            <button class="editBtn" type="button"><small>Edit</small></button>
+                            <button class="deleteBtn" type="button" data-post-id="<%= post.id %>"><small>Delete</small></button>
+                        </div>
                     </div>
                 </div>
-            </div>
             <% }); %>
         <% } else { %>
             <p style="color: red;">No posts yet. Start by writing one!</p>
         <% } %>
+        
         
         <!--Card Container END-->
         </div>
