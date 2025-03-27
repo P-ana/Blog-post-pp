@@ -1,22 +1,17 @@
+/*Global styles*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100&display=swap");
 
 * {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+
+/*Body & General Layout*/
 body{
     margin: 0;
     padding: 0;
     height: 100vh;
     background-color: #f5f5f5;
-}
-
-h2{
-  color:#8a8a8a;
-  font-size:medium;
-}
-.btn{
-    margin: 20px auto !important;
 }
 
 form, #editPostForm{
@@ -33,51 +28,7 @@ form, #editPostForm{
   border: 1px solid #ddd; 
   max-height: fit-content;
 }
-   
 
-input, textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 13px;
-  outline: none;
-  transition: border 0.3s ease-in-out;
-}
-
-textarea{
-  height: 200px;
-}
-input::placeholder, textarea::placeholder{
-  color:#8a8a8a;
-  font-size:small;
-  font-weight: lighter;
-  text-align: left;
-}
-
-.button{
-  width: 112px;
-  height: 37px;
-  border-radius:19px ;
-  background-clip: padding-box;
-  background-color: #01497B;
-  border:1px solid #01497B;
-  color: #fff;
-  font-weight: bold;
-  margin-top: 30px;
-}
-
-.button:hover,.editBtn:hover,.deleteBtn:hover{background-color: #fff; border:1px solid #01497B; color:#01497B; cursor:pointer;}
-
-
-
-input:focus,.editBtn:hover,.deleteBtn:hover, button:focus{
-        outline: 2px solid #195F85; /* Change outline color */
-        border-color: #195F85; /* Change border color */
-        box-shadow: 0 0 8px rgba(23, 162, 184, 0.6); /* Add glow effect */
-    }
-   
 .cards-container{
   width: 100%;
   max-width: 1000px;
@@ -117,7 +68,88 @@ input:focus,.editBtn:hover,.deleteBtn:hover, button:focus{
     padding: 20px;
     min-height: 250px;
   }
+/*Headings*/
+h2{
+  color:#8a8a8a;
+  font-size:medium;
+}
+.card-body p {
+  font-size: 13px;
+  margin: 10px 0 10px;
+}
+.card-body h4{
+  margin-top:10px ;
+}
+
+.user-info small {
+  color: #fff;
+}
+
+.user-info small:hover{
+  color:#01497B ;
+}
+
+/*Button styles*/
+.btn{
+    margin: 20px auto !important;
+}
+
+.editBtn, .deleteBtn{  
+  cursor: pointer;
+  background-color: #01497B;
+  border-radius: 12px;
+}
+
+.button, .editBtn, .deleteBtn {
+  border: 1px solid transparent; 
+  transition: all 0.3s ease-in-out;
+}
+
+.button{
+  width: 112px;
+  height: 37px;
+  border-radius:19px ;
+  background-clip: padding-box;
+  background-color: #01497B;
+  border:1px solid #01497B;
+  color: #fff;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+.button:hover,.editBtn:hover,.deleteBtn:hover{background-color: #fff; border:1px solid #01497B; color:#01497B; cursor:pointer;}
+
   
+/*Input field */
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 13px;
+  outline: none;
+  transition: border 0.3s ease-in-out;
+}
+
+textarea{
+  height: 200px;
+}
+input::placeholder, textarea::placeholder{
+  color:#8a8a8a;
+  font-size:small;
+  font-weight: lighter;
+  text-align: left;
+}
+
+
+input:focus,.editBtn:hover,.deleteBtn:hover, button:focus{
+        outline: 2px solid #195F85; /* Change outline color */
+        border-color: #195F85; /* Change border color */
+        box-shadow: 0 0 8px rgba(23, 162, 184, 0.6); /* Add glow effect */
+    }
+   
+/*Other*/
   .tag {
     background: #cccccc;
     border-radius: 50px;
@@ -132,56 +164,26 @@ input:focus,.editBtn:hover,.deleteBtn:hover, button:focus{
     background-color: #5e76bf;
   }
 
-  
-  .card-body p {
-    font-size: 13px;
-    margin: 10px 0 10px;
-  }
-  .card-body h4{
-    margin-top:10px ;
-  }
-
-  .user-info small {
-    color: #fff;
-  }
-
-  .user-info small:hover{
-    color:#01497B ;
-  }
-.editBtn, .deleteBtn{  
-  cursor: pointer;
-  background-color: #01497B;
-  border-radius: 12px;
-}
-
-.button, .editBtn, .deleteBtn {
-  border: 1px solid transparent; 
-  transition: all 0.3s ease-in-out;
-}
   .userCard{
    display: none;
   }
 
-
+/*Responsive design*/
   @media (max-width: 768px) {
     .bg-dark {
         flex-direction: column !important;
         text-align: center;
-        width: 100%;
-    }
-    
+        width: 100%;}
+  
     h1 {
-        font-size: 1.8rem; /* Smaller heading on small screens */
-    }
+        font-size: 1.8rem; }
     p {
-        font-size: 0.9rem; /* Smaller text for readability */
-    }
+        font-size: 0.9rem; }
    .wrapper{
     width: 100%;
     padding: 10px;
     margin: 0;
    } 
-
    form{
     max-width: 500px;
     width: 90%;
@@ -198,7 +200,6 @@ input:focus,.editBtn:hover,.deleteBtn:hover, button:focus{
         justify-content: center;
         align-items: center;
     }
-    
     .tag{
       font-size: 0.6rem;
       margin-bottom: 5px;
