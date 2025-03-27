@@ -23,14 +23,15 @@ form, #editPostForm{
   width: 100%;
   background-color: white;
   padding: 20px;
-  margin: 50px 20px; /* Centering with margin */
+  margin: 50px 20px; 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  border: 1px solid #ddd; /* Light border */
+  border-radius: 10px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd; 
+  max-height: fit-content;
 }
    
 
@@ -62,11 +63,9 @@ input::placeholder, textarea::placeholder{
   background-clip: padding-box;
   background-color: #01497B;
   border:1px solid #01497B;
-  border:none;
   color: #fff;
   font-weight: bold;
   margin-top: 30px;
- 
 }
 
 .button:hover,.editBtn:hover,.deleteBtn:hover{background-color: #fff; border:1px solid #01497B; color:#01497B; cursor:pointer;}
@@ -80,20 +79,19 @@ input:focus,.editBtn:hover,.deleteBtn:hover, button:focus{
     }
    
 .cards-container{
+  width: 100%;
   max-width: 1000px;
   min-height: 80vh;
-  display: flex;
-  flex-wrap: wrap;
-  flex: 2; 
-  justify-content: center;
-  align-items: flex-start;
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 10px;
   margin-left: 10px;
   margin-top: 60px;
   padding-left: 20px;
 }
 .wrapper{
-   max-width: 50%;
-   height: 100vh;
+   min-width: 30%;
+   min-height: 100vh;
    display: flex;
    justify-content:center;   
    flex: 1;
@@ -114,7 +112,7 @@ input:focus,.editBtn:hover,.deleteBtn:hover, button:focus{
   .card-body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    text-align: left;
     align-items: flex-start;
     padding: 20px;
     min-height: 250px;
@@ -124,7 +122,7 @@ input:focus,.editBtn:hover,.deleteBtn:hover, button:focus{
     background: #cccccc;
     border-radius: 50px;
     font-size: 12px;
-    margin: 0;
+    margin:0;
     color: #fff;
     padding: 2px 10px;
     text-transform: uppercase;
@@ -137,9 +135,11 @@ input:focus,.editBtn:hover,.deleteBtn:hover, button:focus{
   
   .card-body p {
     font-size: 13px;
-    margin: 0 0 40px;
+    margin: 10px 0 10px;
   }
-
+  .card-body h4{
+    margin-top:10px ;
+  }
 
   .user-info small {
     color: #fff;
@@ -148,19 +148,16 @@ input:focus,.editBtn:hover,.deleteBtn:hover, button:focus{
   .user-info small:hover{
     color:#01497B ;
   }
-.editBtn{  
+.editBtn, .deleteBtn{  
   cursor: pointer;
   background-color: #01497B;
-  border: none;
   border-radius: 12px;
 }
 
-.deleteBtn{
-  cursor: pointer;
-  background-color: #01497B;
-  border: none;
-  border-radius: 12px;}
-
+.button, .editBtn, .deleteBtn {
+  border: 1px solid transparent; 
+  transition: all 0.3s ease-in-out;
+}
   .userCard{
    display: none;
   }
@@ -170,6 +167,7 @@ input:focus,.editBtn:hover,.deleteBtn:hover, button:focus{
     .bg-dark {
         flex-direction: column !important;
         text-align: center;
+        width: 100%;
     }
     
     h1 {
@@ -185,7 +183,8 @@ input:focus,.editBtn:hover,.deleteBtn:hover, button:focus{
    } 
 
    form{
-    width: 100%;
+    max-width: 500px;
+    width: 90%;
    }
     .cards-container {
         display: flex;
@@ -193,18 +192,25 @@ input:focus,.editBtn:hover,.deleteBtn:hover, button:focus{
         align-items: center;
     }
     .card {
-        width: 50%; /* Ensure cards are not too wide */
+        max-width: 90%; 
         margin-bottom: 10px;
         margin-top: 10px;
         justify-content: center;
         align-items: center;
     }
+    
     .tag{
       font-size: 0.6rem;
       margin-bottom: 5px;
     }
     .user-info small{
-      font-size: 0.7rem;
+      font-size: 0.9rem;
+    }
+    .card-body h4{
+      font-size: 1rem;
+    }
+    .card-body p{
+      font-size: 0.9rem;
     }
 }
 

@@ -26,7 +26,7 @@
           <!-- Hidden Edit Form -->
           <% if(posts && posts.length>0) {%>
             <% posts.forEach(function(post) { %>
-          <div class="wrapper" id="edit" style="display: none;">
+          <div class="wrapper edit"  style="display: none;">
                 <form id="editPostForm"  class="text-secondary">
                 <img src="Blogify Logo - Original - 5000x5000.png" width="90" height="90"alt="icon">
                 <h2 class="text-center">Update a Blog Post</h2>
@@ -45,28 +45,22 @@
               <span class="tag tag-purple">Popular</span>
               <h4>How to Keep Going When You Don’t Know What’s Next</h4>
               <p>The future can be scary, but there are ways to deal with that fear.</p>
-              <div class="user-info">
-              </div>
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-body" >
-              <span class="tag tag-purple">Trending</span>
-              <h4>New Blogging Strategies for 2024</h4>
-              <p>Discover the latest techniques to grow your audience.</p>
-              <div class="user-info">
+            <div class="card" >
+              <div class="card-body">
+                <span class="tag tag-purple">Trending</span>
+                <h4>New Blogging Strategies for 2024</h4>
+                <p>Discover the latest techniques to grow your audience.</p>
               </div>
             </div>
-          </div>
 
           <div class="card">
             <div class="card-body" >
               <span class="tag tag-purple">Latest</span>
               <h4>The Ultimate Guide to Writing a Great Blog Post</h4>
               <p>Learn the best practices for creating engaging content.</p>
-              <div class="user-info">
-              </div>
             </div>
           </div>
           <!--Hidden posts-->
@@ -93,6 +87,7 @@
                       <img src="4413403.jpg" style="width: 250px;height: 180px; margin: 0;align-self: center;">
                     </div>
                   </div>
+                </div>
             <% } %>
         <!--Card Container END-->
         </div>
@@ -115,7 +110,7 @@ arrayBtns.forEach((btn)=>{
   event.preventDefault();
   let id = btn.getAttribute("data-post-id");
 
-  document.querySelector("#edit").style.display="block";
+  document.querySelector(".edit").style.display="block";
   document.querySelector(".wrapper").style.display="none";
 
   const updatedTitle= document.getElementById("updateTitle");
@@ -147,7 +142,7 @@ updatedContent.value = btn.closest(".card").querySelector("p").innerText;
        .then(data => {
           if (data.success) {
             document.querySelector(".wrapper").style.display="block";
-            document.querySelector("#edit").style.display="none";
+            document.querySelector(".edit").style.display="none";
           } else {
             alert('Failed to update post');
           }
