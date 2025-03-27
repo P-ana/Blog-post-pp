@@ -9,10 +9,10 @@
 </head>
 <body>
     <!--Main-->
-    <div class="bg-dark min-vh-100 d-flex">
+    <div class="bg-dark min-vh-100 d-flex  align-items-center justify-content-center">
         <!-- Left Side: Form -->
         <div class="wrapper">
-          <form action="/submit" method="POST" class="text-secondary">
+          <form action="/submit" method="POST" class="text-secondary p-4 ">
             <img src="Blogify Logo - Original - 5000x5000.png" width="90" height="90"alt="icon">
             <h2 class="text-center">Create a Blog Post</h2>
             <input type="text" id="title" name="title" required placeholder="Title">
@@ -23,89 +23,177 @@
         </div>
         <!--Form END-->
 
+          <!-- Hidden Edit Form -->
+          <% if(posts && posts.length>0) {%>
+            <% posts.forEach(function(post) { %>
+          <div class="wrapper" id="edit" style="display: none;">
+                <form id="editPostForm"  class="text-secondary">
+                <img src="Blogify Logo - Original - 5000x5000.png" width="90" height="90"alt="icon">
+                <h2 class="text-center">Update a Blog Post</h2>
+                <input type="hidden" id="updatePostId" name="postId">
+                <input type="text" id="updateTitle" name="updatedTitle" value="<%=post.title %>">
+                <input type="text" id="updateAuthor" name="updatedAuthor" value="<%= post.author  %>">
+                <textarea id="updateContent" name="updatedContent" ><%= post.content  %></textarea>
+                <button type="submit" class="button updateBtn">Update</button>
+            </form>
+        </div>
+        <% }); } %>
         <!-- Right Side: Posts -->
         <div class="cards-container">
-          <div class="card">
+          <div class="card" >
             <div class="card-body">
               <span class="tag tag-purple">Popular</span>
               <h4>How to Keep Going When You Don’t Know What’s Next</h4>
               <p>The future can be scary, but there are ways to deal with that fear.</p>
               <div class="user-info">
-                <button class="editBtn" type="button"><small>Edit</small></button>
-                <button class="deleteBtn" type="button" data-post-id="<%=post.id  %>"><small>Delete</small></button>
               </div>
             </div>
           </div>
-      
+
           <div class="card">
-            <div class="card-body">
+            <div class="card-body" >
               <span class="tag tag-purple">Trending</span>
               <h4>New Blogging Strategies for 2024</h4>
               <p>Discover the latest techniques to grow your audience.</p>
               <div class="user-info">
-                <button class="editBtn" type="button"><small>Edit</small></button>
-                <button class="deleteBtn" type="button" data-post-id="<%=post.id  %>"><small>Delete</small></button>
               </div>
             </div>
           </div>
-          <% if (typeof posts !== "undefined" && posts.length > 0) { %>
-            <% posts.forEach(post => { %>
+
+          <div class="card">
+            <div class="card-body" >
+              <span class="tag tag-purple">Latest</span>
+              <h4>The Ultimate Guide to Writing a Great Blog Post</h4>
+              <p>Learn the best practices for creating engaging content.</p>
+              <div class="user-info">
+              </div>
+            </div>
+          </div>
+          <!--Hidden posts-->
+          <% if (posts && posts.length > 0) { %>
+            <% posts.forEach(function(post) { %>
                 <div class="card userCard" data-post-id="<%= post.id %>">
                     <div class="card-body">
-                        <span class="tag tag-purple">New Post</span>
+                        <span class="tag tag-purple">Trending</span>
                         <h4><%= post.title %></h4>
                         <p><%= post.content %></p>
                         <p><small>By: <%= post.author %></small></p>
                         <div class="user-info">
-                            <button class="editBtn" type="button"><small>Edit</small></button>
+                            <button class="editBtn" type="button" data-post-id="<%= post.id %>"><small>Edit</small></button>
                             <button class="deleteBtn" type="button" data-post-id="<%= post.id %>"><small>Delete</small></button>
                         </div>
                     </div>
                 </div>
             <% }); %>
-        <% } else { %>
-            <p style="color: red;">No posts yet. Start by writing one!</p>
-        <% } %>
-        
-        
+            <% } else { %>
+              <div class="card userCard">
+                <div class="card-body"> 
+                    <h2 style="color: #01497B;align-self: center;font-weight: bolder;">No posts found</h2>
+                    <div>
+                      <img src="4413403.jpg" style="width: 250px;height: 180px; margin: 0;align-self: center;">
+                    </div>
+                  </div>
+            <% } %>
         <!--Card Container END-->
         </div>
     <!--Main END-->   
       </div>   
-   
+
 <script>
+//Creating a new post
+let content= document.getElementsByClassName("userCard");
+  document.addEventListener("DOMContentLoaded",()=>{
+  for (let i = 0; i < content.length; i++) {
+    content[i].style.display="block";
+  }
+});
+//Edit content
+let editBtns=document.querySelectorAll(".editBtn");
+let arrayBtns = Array.from(editBtns);
+arrayBtns.forEach((btn)=>{
+  btn.addEventListener("click", function(event){
+  event.preventDefault();
+  let id = btn.getAttribute("data-post-id");
+
+  document.querySelector("#edit").style.display="block";
+  document.querySelector(".wrapper").style.display="none";
+
+  const updatedTitle= document.getElementById("updateTitle");
+  const updatedAuthor=document.getElementById("updateAuthor");
+  const updatedContent=document.getElementById("updateContent");
+
+updatedTitle.value = btn.closest(".card").querySelector("h4").innerText;
+updatedAuthor.value = btn.closest(".card").querySelector("p small").innerText.replace("By: ", "");
+updatedContent.value = btn.closest(".card").querySelector("p").innerText;
+
+
+  document.getElementById("updatePostId").value=id;
+
+  document.querySelector(".updateBtn").addEventListener("click", function(){
+    if (updatedTitle.value.trim() !== "" && updatedAuthor.value.trim() !== "" && updatedContent.value.trim() !== "") {
+      const updatedPost={
+        title: updatedTitle.value,
+        author: updatedAuthor.value,
+        content: updatedContent.value
+      }
+      fetch(`/edit-post/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedPost),
+      })
+       .then(response=> response.json())
+       .then(data => {
+          if (data.success) {
+            document.querySelector(".wrapper").style.display="block";
+            document.querySelector("#edit").style.display="none";
+          } else {
+            alert('Failed to update post');
+          }
+        })
+       .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+    }
+  )})});
  
 
-const deleteBtns = document.querySelectorAll(".deleteBtn");
-  
-deleteBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-    const postId=btn.getAttribute("data-post-id");
-     fetch("/delete-post", {
-       method: "DELETE",
+
+// Delete content
+
+let deleteBtns=document.querySelectorAll(".deleteBtn");
+let myArray = Array.from(deleteBtns);
+myArray.forEach((btn)=>{
+  btn.addEventListener("click", function(event){
+    event.preventDefault();
+    let id = btn.getAttribute("data-post-id");
+    fetch(`/delete-post/${id}`, {
+      method: 'DELETE',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({postId: postId}),
-     })
-     .then((response) => response.json())
-     .then((data) => {
-      console.log(data.message);
-      btn.closest(".card").remove();
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    })
+    .then(response=> response.json())
+    .then(data => {
+      if (data.success) {
+        const postCard=btn.closest(".card");
+        if (postCard){
+          postCard.remove();
+        }
+      } else {
+        alert('Failed to delete post');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
     });
   });
- 
-
-  
-  
+});
 
 
 
-    
 </script>      
 </body>
 </html>
